@@ -1,72 +1,74 @@
+
+
 # maestri-mvp
 
 Juntos dia após dia crescemos dentro de um propósito. Acreditamos que a educação é o maior instrumento que Deus usa para mudar o mundo.
 
-## Installation - Docker
+## Instalação - Docker
 
-The easiest way to get up and running is with [Docker](https://www.docker.com/).
+A maneira mais fácil de começar é com o [Docker](https://www.docker.com/).
 
-Just [install Docker](https://www.docker.com/get-started) and
+Basta [instalar o Docker](https://www.docker.com/get-started) e
 [Docker Compose](https://docs.docker.com/compose/install/)
-and then run:
+e então executar:
 
 ```
 make init
 ```
 
-This will spin up a database, web worker, celery worker, and Redis broker and run your migrations.
+Isso iniciará um banco de dados, servidor web, worker do Celery e broker Redis, e executará suas migrações.
 
-You can then go to [localhost:8000](http://localhost:8000/) to view the app.
+Você pode então acessar [localhost:8000](http://localhost:8000/) para visualizar o aplicativo.
 
-*Note: if you get an error, make sure you have a `.env` file, or create one based on `.env.example`.*
+*Nota: se você receber um erro, certifique-se de ter um arquivo `.env`, ou crie um baseado no `.env.example`.*
 
-### Using the Makefile
+### Usando o Makefile
 
-You can run `make` to see other helper functions, and you can view the source
-of the file in case you need to run any specific commands.
+Você pode executar `make` para ver outras funções auxiliares, e pode visualizar o código-fonte
+do arquivo caso precise executar comandos específicos.
 
-For example, you can run management commands in containers using the same method 
-used in the `Makefile`. E.g.
+Por exemplo, você pode executar comandos de gerenciamento em contêineres usando o mesmo método 
+usado no `Makefile`. Por exemplo:
 
 ```
 docker compose exec web python manage.py createsuperuser
 ```
 
-## Installation - Native
+## Instalação - Nativa
 
-You can also install/run the app directly on your OS using the instructions below.
+Você também pode instalar/executar o aplicativo diretamente em seu sistema operacional usando as instruções abaixo.
 
-Setup a virtualenv and install requirements
-(this example uses [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)):
+Configure um ambiente virtual e instale os requisitos
+(este exemplo usa [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)):
 
 ```bash
 mkvirtualenv src -p python3.11
 pip install -r dev-requirements.txt
 ```
 
-## Set up database
+## Configurar banco de dados
 
-*If you are using Docker you can skip these steps.*
+*Se você estiver usando Docker, pode pular estas etapas.*
 
-Create a database named `src`.
+Crie um banco de dados chamado `src`.
 
 ```
 createdb src
 ```
 
-Create database migrations:
+Crie as migrações do banco de dados:
 
 ```
 ./manage.py makemigrations
 ```
 
-Create database tables:
+Crie as tabelas do banco de dados:
 
 ```
 ./manage.py migrate
 ```
 
-## Running server
+## Executando o servidor
 
 **Docker:**
 
@@ -74,15 +76,15 @@ Create database tables:
 make start
 ```
 
-**Native:**
+**Nativo:**
 
 ```bash
 ./manage.py runserver
 ```
 
-## Building front-end
+## Construindo o front-end
 
-To build JavaScript and CSS files, first install npm packages:
+Para construir os arquivos JavaScript e CSS, primeiro instale os pacotes npm:
 
 **Docker:**
 
@@ -90,13 +92,13 @@ To build JavaScript and CSS files, first install npm packages:
 make npm-install
 ```
 
-**Native:**
+**Nativo:**
 
 ```bash
 npm install
 ```
 
-Then build (and watch for changes locally):
+Em seguida, construa (e observe as alterações localmente):
 
 **Docker:**
 
@@ -104,50 +106,50 @@ Then build (and watch for changes locally):
 make npm-watch
 ```
 
-**Native:**
+**Nativo:**
 
 ```bash
 npm run dev-watch
 ```
 
-## Running Celery
+## Executando o Celery
 
-Celery can be used to run background tasks.
-If you use Docker it will start automatically.
+O Celery pode ser usado para executar tarefas em segundo plano.
+Se você usar o Docker, ele iniciará automaticamente.
 
-You can run it using:
+Você pode executá-lo usando:
 
 ```bash
 celery -A src worker -l INFO --pool=solo
 ```
 
-Or with celery beat (for scheduled tasks):
+Ou com celery beat (para tarefas agendadas):
 
 ```bash
 celery -A src worker -l INFO -B --pool=solo
 ```
 
-Note: Using the `solo` pool is recommended for development but not for production.
+Nota: Usar o pool `solo` é recomendado para desenvolvimento, mas não para produção.
 
-## Google Authentication Setup
+## Configuração de Autenticação Google
 
-To setup Google Authentication, follow the [instructions here](https://docs.allauth.org/en/latest/socialaccount/providers/google.html).
+Para configurar a Autenticação Google, siga as [instruções aqui](https://docs.allauth.org/en/latest/socialaccount/providers/google.html).
 
-## Installing Git commit hooks
+## Instalando hooks de commit do Git
 
-To install the Git commit hooks run the following:
+Para instalar os hooks de commit do Git, execute o seguinte:
 
 ```shell
 $ pre-commit install --install-hooks
 ```
 
-Once these are installed they will be run on every commit.
+Uma vez instalados, eles serão executados em cada commit.
 
-For more information see the [docs](https://docs.saaspegasus.com/code-structure.html#code-formatting).
+Para mais informações, consulte a [documentação](https://docs.saaspegasus.com/code-structure.html#code-formatting).
 
-## Running Tests
+## Executando Testes
 
-To run tests:
+Para executar testes:
 
 **Docker:**
 
@@ -155,13 +157,13 @@ To run tests:
 make test
 ```
 
-**Native:**
+**Nativo:**
 
 ```bash
 ./manage.py test
 ```
 
-Or to test a specific app/module:
+Ou para testar um aplicativo/módulo específico:
 
 **Docker:**
 
@@ -169,13 +171,13 @@ Or to test a specific app/module:
 docker compose exec web python manage.py test apps.utils.tests.test_slugs
 ```
 
-**Native:**
+**Nativo:**
 
 ```bash
 ./manage.py test apps.utils.tests.test_slugs
 ```
 
-On Linux-based systems you can watch for changes using the following:
+Em sistemas baseados em Linux, você pode observar as alterações usando o seguinte:
 
 **Docker:**
 
@@ -183,7 +185,7 @@ On Linux-based systems you can watch for changes using the following:
 find . -name '*.py' | entr docker compose exec web python manage.py test apps.utils.tests.test_slugs
 ```
 
-**Native:**
+**Nativo:**
 
 ```bash
 find . -name '*.py' | entr python ./manage.py test apps.utils.tests.test_slugs
