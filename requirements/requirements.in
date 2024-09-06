@@ -21,3 +21,4 @@ celery[redis]
 django-celery-beat
 sentry-sdk
 whitenoise[brotli]
+pillow

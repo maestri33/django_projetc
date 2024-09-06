@@ -18,6 +18,7 @@ _dist/
 .direnv
 .envrc
 deploy/.env
+venv/
 
 # uncomment these lines after setting up the front-end build pipeline in dev and production
 # static/css/

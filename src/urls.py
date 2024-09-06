@@ -49,6 +49,7 @@ urlpatterns = [
     path("api/schema/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
     # hijack urls for impersonation
     path("hijack/", include("hijack.urls", namespace="hijack")),
+    path("profiles/", include("apps.profiles.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.ENABLE_DEBUG_TOOLBAR:

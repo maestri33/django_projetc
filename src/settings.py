@@ -85,9 +85,10 @@ THIRD_PARTY_APPS = [
 PROJECT_APPS = [
     "apps.authentication.apps.AuthenticationConfig",
     "apps.group_chat",
-    "apps.users.apps.UserConfig",
+    "apps.users",
     "apps.dashboard.apps.DashboardConfig",
     "apps.web",
+    "apps.profiles",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
